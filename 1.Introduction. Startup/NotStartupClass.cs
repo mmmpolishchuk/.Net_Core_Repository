@@ -19,21 +19,26 @@ namespace _1.Introduction._Startup
         {
             _iConfiguration = iConfiguration;
         }
-        
+
+        public void ConfigureServices(IServiceCollection collection)
+        {
+            collection.AddControllers();
+        }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync(_iConfiguration["Logging:LogLevel:Microsoft.Hosting.Lifetime"]);
-                });
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}");
             });
         }
     }

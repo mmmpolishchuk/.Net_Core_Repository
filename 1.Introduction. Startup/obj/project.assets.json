@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Styding\\Programming\\ITEA.MAIN\\.NET Core\\Homeworks\\1.Introduction. Startup\\1.Introduction. Startup.csproj",
+      "projectUniqueName": "D:\\Styding\\Programming\\ITEA.MAIN\\.NET Core\\.Net_Core_Repository\\1.Introduction. Startup\\1.Introduction. Startup.csproj",
       "projectName": "1.Introduction. Startup",
-      "projectPath": "D:\\Styding\\Programming\\ITEA.MAIN\\.NET Core\\Homeworks\\1.Introduction. Startup\\1.Introduction. Startup.csproj",
+      "projectPath": "D:\\Styding\\Programming\\ITEA.MAIN\\.NET Core\\.Net_Core_Repository\\1.Introduction. Startup\\1.Introduction. Startup.csproj",
       "packagesPath": "C:\\Users\\mmpol\\.nuget\\packages\\",
-      "outputPath": "D:\\Styding\\Programming\\ITEA.MAIN\\.NET Core\\Homeworks\\1.Introduction. Startup\\obj\\",
+      "outputPath": "D:\\Styding\\Programming\\ITEA.MAIN\\.NET Core\\.Net_Core_Repository\\1.Introduction. Startup\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mmpol\\AppData\\Roaming\\NuGet\\NuGet.Config",
