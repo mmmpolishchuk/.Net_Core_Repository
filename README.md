@@ -1,1 +1,1 @@
-# .Net_Core_Repository
+.Net Core course files from ITEA
