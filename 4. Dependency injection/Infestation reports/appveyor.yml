@@ -5,9 +5,9 @@ cache: 
 before_build: nuget restore
 environment:
   matrix:
-  - di_project: 4. Dependency injection.sln
-  - intro_project: 1.Introduction. Startup.sln
+  - di_project: DI. FortuneTeller.csproj
+  - infestation_project: Infestation reports.csproj
 build:
-    project: 4. Dependency injection.sln
-    parallel: true     
-    publish_wap: true
+    project: di_project
+    project: infestation_project
+    publish_wap: true
