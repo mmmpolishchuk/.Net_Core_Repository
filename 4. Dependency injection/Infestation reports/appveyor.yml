@@ -3,9 +3,12 @@ configuration: Release
 cache: 
     - packages -> **\packages.config
 before_build: nuget restore
-build:     
-    publish_wap: true
 environment:
   matrix:
   - di_project: DI. FortuneTeller.csproj
   - infestation_project: Infestation reports.csproj
+build:
+    project: di_project
+    project: infestation_project
+    parallel: true     
+    publish_wap: true
