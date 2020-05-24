@@ -10,15 +10,7 @@ environment:
   common_var2: MVC. Infestation Reports
 
   matrix:
-    # first group
-    - db: mysql
-      provider: mysql
-
-    # second group
-    - db: mssql
-      provider: mssql
-      password:
-        secure: DHEU39J6X9VD376==
+    solution_name: 3 - 4. DI and NewsBase projects.sln
 
 platform:
   - x86
