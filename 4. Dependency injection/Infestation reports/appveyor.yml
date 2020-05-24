@@ -9,6 +9,5 @@ environment:
   - intro_project: 1.Introduction. Startup.sln
 build:
     project: 4. Dependency injection.sln
-    project: 1.Introduction. Startup.sln
     parallel: true     
     publish_wap: true
