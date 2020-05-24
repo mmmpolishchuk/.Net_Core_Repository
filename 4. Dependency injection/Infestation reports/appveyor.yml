@@ -8,7 +8,7 @@ environment:
   - di_project: DI. FortuneTeller.csproj
   - infestation_project: Infestation reports.csproj
 build:
-    project: di_project
-    project: infestation_project
+    project: DI. FortuneTeller.csproj
+    project: Infestation reports.csproj
     parallel: true     
     publish_wap: true
