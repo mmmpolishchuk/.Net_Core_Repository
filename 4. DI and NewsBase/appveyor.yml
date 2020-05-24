@@ -5,12 +5,9 @@ cache: 
 before_build: nuget restore
 
 environment:
-  # these variables are common to all jobs
-  common_var1: DI. Fortune teller project
-  common_var2: MVC. Infestation Reports
-
   matrix:
-    solution_name: 3 - 4. DI and NewsBase projects.sln
+    project_name: 3. Infestation report.csproj
+    project_name: 4. Dependency Injection Project.csproj
 
 platform:
   - x86
