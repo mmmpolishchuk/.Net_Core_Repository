@@ -4,6 +4,5 @@ cache: 
     - packages -> **\packages.config
 before_build: nuget restore
 build:     
-    project: DI. FortuneTeller.csproj
-    project: Infestation reports.csproj
-    publish_wap: true
+    project: 4. Dependency injection.sln
+    publish_wap: true
