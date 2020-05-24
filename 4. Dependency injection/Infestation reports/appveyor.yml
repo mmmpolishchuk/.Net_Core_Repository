@@ -1,0 +1,8 @@
+version: 1.0.{build}
+configuration: Release
+cache: 
+    - packages -> **\packages.config
+before_build: nuget restore
+build:     
+    project: 4. Dependency injection.sln
+    publish_wap: true
