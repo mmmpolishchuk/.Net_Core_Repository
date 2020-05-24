@@ -36,9 +36,6 @@ msbuild.wrn
 .vs/
 
 ###################
-
-
-
 *.min.css
 *.min.js
 *.map
@@ -261,3 +258,6 @@ __pycache__/
 
 # Windows thumbnail cache files
 Thumbs.db
+
+
+
