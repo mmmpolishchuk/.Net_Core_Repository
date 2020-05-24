@@ -3,8 +3,6 @@ configuration: Release
 cache: 
     - packages -> **\packages.config
 before_build: nuget restore
-build:     
-    publish_wap: true
 
 environment:
   # these variables are common to all jobs
