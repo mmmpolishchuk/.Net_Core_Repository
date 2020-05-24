@@ -1,0 +1,36 @@
+﻿@{
+    var newsList = ViewData["news"] as List<News>;
+}
+
+<h1 align="center">The latest news</h1>
+
+@section NewsSection
+{
+    <table class="table table-borderless table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>AuthorName</th>
+                <th>IsFake</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var news in newsList)
+                {
+                    <tr>
+                        <td>@news.Id</td>
+                        <td>@news.Title</td>
+                        <td>@news.AuthorName</td>
+                        <td>@news.IsFake</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+
+
+
