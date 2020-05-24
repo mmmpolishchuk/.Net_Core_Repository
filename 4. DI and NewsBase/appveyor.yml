@@ -8,8 +8,8 @@ build:     
 
 environment:
   # these variables are common to all jobs
-  common_var1: value1
-  common_var2: value2
+  common_var1: DI. Fortune teller project
+  common_var2: MVC. Infestation Reports
 
   matrix:
     # first group
