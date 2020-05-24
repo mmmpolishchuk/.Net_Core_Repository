@@ -4,7 +4,8 @@ cache: 
     - packages -> **\packages.config
 before_build: nuget restore
 build:     
-    project: Infestation reports.csproj
-    project: DI. FortuneTeller.csproj
-    parallel: true
-    publish_wap: true
+    publish_wap: true
+environment:
+  matrix:
+  - di_project: DI. FortuneTeller.csproj
+  - infestation_project: Infestation reports.csproj
