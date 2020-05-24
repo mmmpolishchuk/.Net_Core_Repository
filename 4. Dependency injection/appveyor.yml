@@ -5,4 +5,5 @@ cache: 
 before_build: nuget restore
 build:     
     project: 4. Dependency injection.sln
+    parallel: true
     publish_wap: true
