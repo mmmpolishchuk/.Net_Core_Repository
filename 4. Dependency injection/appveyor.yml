@@ -5,7 +5,7 @@ cache: 
 before_build: nuget restore
 environment:
   matrix:
-  - project: 4. Dependency injection\4. Dependency injection.sln
-build_script:
-  - cmd: msbuild %project%
+  - project_name: 4. Dependency injection\4. Dependency injection.sln
+build:
+    project: project_name
   
