@@ -17,7 +17,7 @@ environment:
       full_project_name: 4. Dependency injection/Infestation reports/Infestation reports.csproj
 
 before_build: 
-  - nuget restore dotnet build
+  - nuget restore %solution% dotnet build
 build: 
     project: '%full_project_name%'
     publish_wap: true
