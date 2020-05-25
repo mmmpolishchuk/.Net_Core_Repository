@@ -17,7 +17,9 @@ environment:
       full_project_name: 4. Dependency injection/Infestation reports/Infestation reports.csproj
 
 before_build: 
-  - nuget restore 
+  - nuget restore 1.Introduction. Startup.sln
+  - nuget restore 3. MVC. NewsBase.sln
+  - nuget restore 4. Dependency injection.sln
 build: 
     project: '%full_project_name%'
     publish_wap: true
