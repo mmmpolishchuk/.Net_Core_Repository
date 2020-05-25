@@ -4,19 +4,19 @@ cache:
     - packages -> **\packages.config
 environment:
     matrix:
-    - solution_folder: 1.Introduction/Introduction
-      full_project_name: 1.Introduction/Introduction/Introduction.csproj
+    - solution: 1.Introduction. Startup.sln
+      full_project_name: 1.Introduction. Startup/1.Introduction. Startup.csproj
       
-    - solution_folder: 3.BasicInfo/BasicInfo
-      full_project_name: 3.BasicInfo/BasicInfo/BasicInfo.csproj 
+    - solution: 3. MVC. NewsBase.sln
+      full_project_name: 3. MVC. NewsBase/3. MVC. NewsBase.csproj
     
-    - solution_folder: 3.BasicInfo/BasicInfo
-      full_project_name: 3.BasicInfo/SimpleDiExample/SimpleDiExample.csproj
+    - solution: 4. Dependency injection.sln
+      full_project_name: 4. Dependency injection/DI. FortuneTeller/DI. FortuneTeller.csproj
 
-    - solution_folder: 4.Model/Infestation
-      full_project_name: 4.Model/Infestation/Infestation/Infestation.csproj
+    - solution: 4. Dependency injection.sln
+      full_project_name: 4. Dependency injection/Infestation reports/Infestation reports.csproj
 
-before_build: nuget restore %solution_folder%
+before_build: nuget restore %solution%
 build: 
     project: '%full_project_name%'
     publish_wap: true
