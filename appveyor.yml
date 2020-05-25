@@ -16,7 +16,7 @@ environment:
     - solution: 4.Dependency injection.sln
       full_project_name: 4.Dependency injection/Infestation reports/Infestation reports.csproj
 
-before_build: nuget restore %solution%
+#before_build: nuget restore %solution%
 build: 
     project: '%full_project_name%'
     publish_wap: true
