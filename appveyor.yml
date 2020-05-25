@@ -4,10 +4,10 @@ cache:
     - packages -> **\packages.config
 environment:
     matrix:
-    - solution: 1.Introduction.Startup.sln
+    - solution: 1.Introduction. Startup.sln
       full_project_name: 1.Introduction.Startup/1.Introduction. Startup.csproj
       
-    - solution: 3.MVC.NewsBase.sln
+    - solution: 3.MVC. NewsBase.sln
       full_project_name: 3.MVC. NewsBase/3. MVC. NewsBase.csproj
     
     - solution: 4.Dependency injection.sln
