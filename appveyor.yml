@@ -4,16 +4,16 @@ cache:
     - packages -> **\packages.config
 environment:
     matrix:
-    - solution: 1.Introduction. Startup/1.Introduction. Startup
+    - solution: 1.Introduction. Startup
       full_project_name: 1.Introduction. Startup/1.Introduction. Startup.csproj
       
-    - solution: 3. MVC. NewsBase/3. MVC. NewsBase
+    - solution: 3. MVC. NewsBase
       full_project_name: 3. MVC. NewsBase/3. MVC. NewsBase.csproj
     
-    - solution: 4. Dependency injection/4. Dependency injection
+    - solution: 4. Dependency injection/DI. FortuneTeller
       full_project_name: 4. Dependency injection/DI. FortuneTeller/DI. FortuneTeller.csproj
 
-    - solution: 4. Dependency injection/4. Dependency injection
+    - solution: 4. Dependency injection/Infestation reports
       full_project_name: 4. Dependency injection/Infestation reports/Infestation reports.csproj
 
 before_build: 
