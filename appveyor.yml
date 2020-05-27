@@ -4,17 +4,17 @@ cache:
     - packages -> **\packages.config
 environment:
     matrix:
-    - solution_file: "1.Introduction. Startup.sln"
-    - full_project_name: "1.Introduction. Startup/1.Introduction. Startup.csproj"
+    - solution_file: 1.Introduction_StartupClass
+    - full_project_name: 1.Introduction_StartupClass/1.Introduction_StartupClass/1.Introduction_StartupClass.csproj
       
-    - solution_file: "3.MVC. NewsBase.sln"
-    - full_project_name: "3.MVC. NewsBase/3.MVC. NewsBase.csproj"
+    - solution_file: 3.NewsBase_MVC
+    - full_project_name: 3.NewsBase_MVC/3.NewsBase_MVC/3.NewsBase_MVC.csproj
      
-    - solution_file: "4.Dependency injection.sln"
-    - full_project_name: "4.Dependency injection/DI. FortuneTeller/DI. FortuneTeller.csproj"
+    - solution_file: 4.Dependency injection
+    - full_project_name: 4.Dependency injection/DI. FortuneTeller/DI. FortuneTeller.csproj
 
-    - solution_file: "4.Dependency injection.sln"
-    - full_project_name: "4.Dependency injection/Infestation reports/Infestation reports.csproj"
+    - solution_file: 4.Dependency injection
+    - full_project_name: 4.Dependency injection/Infestation reports/Infestation reports.csproj
 
 before_build: 
     nuget restore %solution_file%
