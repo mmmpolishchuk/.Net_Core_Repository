@@ -5,16 +5,16 @@ cache:
 environment:
     matrix:
     - solution_file: 1.Introduction_StartupClass
-    - full_project_name: 1.Introduction_StartupClass/1.Introduction_StartupClass/1.Introduction_StartupClass.csproj
+      full_project_name: 1.Introduction_StartupClass/1.Introduction_StartupClass/1.Introduction_StartupClass.csproj
       
     - solution_file: 3.NewsBase_MVC
-    - full_project_name: 3.NewsBase_MVC/3.NewsBase_MVC/3.NewsBase_MVC.csproj
+      full_project_name: 3.NewsBase_MVC/3.NewsBase_MVC/3.NewsBase_MVC.csproj
      
     - solution_file: 4.Dependency injection
-    - full_project_name: 4.Dependency injection/DI. FortuneTeller/DI. FortuneTeller.csproj
+      full_project_name: 4.Dependency injection/DI. FortuneTeller/DI. FortuneTeller.csproj
 
     - solution_file: 4.Dependency injection
-    - full_project_name: 4.Dependency injection/Infestation reports/Infestation reports.csproj
+      full_project_name: 4.Dependency injection/Infestation reports/Infestation reports.csproj
 
 before_build: 
     nuget restore %solution_file%
