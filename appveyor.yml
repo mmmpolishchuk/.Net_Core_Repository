@@ -4,7 +4,7 @@ cache:
     - packages -> **\packages.config
 environment:
     matrix:
-    - solution_file:1.Introduction_StartupClass
+    - solution_file: 1.Introduction_StartupClass
     - full_project_name: 1.Introduction_StartupClass/1.Introduction_StartupClass/1.Introduction_StartupClass.csproj
       
     - solution_file: 3.NewsBase_MVC
