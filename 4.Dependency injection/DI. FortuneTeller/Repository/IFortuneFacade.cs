@@ -1,7 +1,8 @@
 ﻿namespace DI._FortuneTeller.Repository
 {
-    public interface IFortuneFacade : IFortuneTeller, IFortuneGetter
+    public interface IFortuneFacade
     {
-        
+        public void TellFortune();
+        public string GetFortune();
     }
 }

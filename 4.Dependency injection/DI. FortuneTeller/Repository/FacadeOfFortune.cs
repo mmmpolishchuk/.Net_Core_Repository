@@ -4,15 +4,21 @@ namespace DI._FortuneTeller.Repository
 {
     public class FacadeOfFortune : IFortuneFacade
     {
-        IFortuneLoader loader = new LoadFortuneClass();
+        private IFortuneTeller teller;
+        private IFortuneGetter getter;
+        public FacadeOfFortune(IFortuneTeller teller, IFortuneGetter getter)
+        {
+            this.teller = teller;
+            this.getter = getter;
+        }
         public void TellFortune()
         {
-            Console.WriteLine(loader.LoadFortune());
+            teller.TellFortune();
         }
 
         public string GetFortune()
         {
-            return loader.LoadFortune();
+            return getter.GetFortune();
         }
 
     }
