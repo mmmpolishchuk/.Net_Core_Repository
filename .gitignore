@@ -35,7 +35,6 @@ msbuild.wrn
 # Visual Studio 2015
 .vs/
 
-
 *.min.css
 *.min.js
 *.map
@@ -43,11 +42,6 @@ msbuild.wrn
 _build/
 _site/
 Properties/
-
-# See #577
-# Use git add -f to force override .sln when required. Not needed in most cases.
-# git add -f myProj.sln
-
 
 Project_Readme.html
 
