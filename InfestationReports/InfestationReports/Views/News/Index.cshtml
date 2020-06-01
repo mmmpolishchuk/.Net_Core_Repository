@@ -1,0 +1,22 @@
+﻿@section NewsSection{
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Text</th>
+            <th>AuthorName</th>
+            <th>IsFake</th>
+        </tr>
+        @foreach (var newsObject in ViewData["allNews"] as List<News>)
+        {
+            var news = newsObject as News;
+            <tr>
+                <td>@news.Id</td>
+                <td>@news.Title</td>
+                <td>@news.Text</td>
+                <td>@news.AuthorName</td>
+                <td>@news.IsFake</td>
+            </tr>
+        }
+    </table>
+}

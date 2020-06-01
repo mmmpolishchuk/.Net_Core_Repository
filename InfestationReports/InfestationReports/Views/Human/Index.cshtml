@@ -1,0 +1,46 @@
+﻿@{
+    var somebody = ViewData["Human"];
+}
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>Is sick</th>
+        <th>Gender</th>
+        <th>Country Id</th>
+    </tr>
+    @if (somebody.GetType() == typeof(List<Human>))
+    {
+        var humans = ViewData["Human"] as List<Human>;
+
+        @foreach (var human in humans)
+        {
+            var singleHuman = human as Human;
+            <tr>
+                <td>@singleHuman.FirstName</td>
+                <td>@singleHuman.LastName</td>
+                <td>@singleHuman.Age</td>
+                <td>@singleHuman.IsSick</td>
+                <td>@singleHuman.Gender</td>
+                <td>@singleHuman.CountryId</td>
+            </tr>
+        }
+    }
+    else
+    {
+        var singleHuman = somebody as Human;
+        <tr>
+            <td>@singleHuman.FirstName</td>
+            <td>@singleHuman.LastName</td>
+            <td>@singleHuman.Age</td>
+            <td>@singleHuman.IsSick</td>
+            <td>@singleHuman.Gender</td>
+            <td>@singleHuman.CountryId</td>
+        </tr>
+    }
+</table>
+
+
+
+
