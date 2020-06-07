@@ -4,7 +4,7 @@ namespace InfestationReports.Models.Repositories.HumanRepository
 {
     public interface IHumanRepository
     {
-        public List<Human> GetAllHumans();
+        public IEnumerable<Human> GetAllHumans();
         public Human GetHuman(int id);
         public void CreateHuman(Human human);
         public void ModifyHuman(Human human);

@@ -4,14 +4,16 @@ using InfestationReports.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InfestationReports.Migrations
 {
     [DbContext(typeof(InfestationContext))]
-    partial class InfestationContextModelSnapshot : ModelSnapshot
+    [Migration("20200607074223_CreateWorldPartsTable")]
+    partial class CreateWorldPartsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

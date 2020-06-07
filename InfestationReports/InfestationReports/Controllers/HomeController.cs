@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace InfestationReports.Controllers
-{
+{   
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -13,7 +13,7 @@ namespace InfestationReports.Controllers
         {
             _logger = logger;
         }
-
+        [Route("[controller]/[action]")]
         public IActionResult Index()
         {
             return View();

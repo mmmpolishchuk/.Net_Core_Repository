@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -21,10 +21,23 @@
     <Compile Remove="Migrations\20200531131713_InsertThroughUpMethod.Designer.cs" />
     <Compile Remove="Migrations\20200531193006_InsertDataThroughUpMethod.cs" />
     <Compile Remove="Migrations\20200531193006_InsertDataThroughUpMethod.Designer.cs" />
+    <Compile Remove="Migrations\20200606095705_InsertNewsThroughUpMethod.cs" />
+    <Compile Remove="Migrations\20200606095705_InsertNewsThroughUpMethod.Designer.cs" />
+    <Compile Remove="Migrations\20200607065731_InsertWorldParts.cs" />
+    <Compile Remove="Migrations\20200607065731_InsertWorldParts.Designer.cs" />
+    <Compile Remove="Migrations\20200607065855_CreateWorldPartsTable.cs" />
+    <Compile Remove="Migrations\20200607065855_CreateWorldPartsTable.Designer.cs" />
+    <Compile Remove="Migrations\20200607070116_InsertWorldPartsValues.cs" />
+    <Compile Remove="Migrations\20200607070116_InsertWorldPartsValues.Designer.cs" />
+    <Compile Remove="Migrations\20200607071407_CreateWorldPartsTable.cs" />
+    <Compile Remove="Migrations\20200607071407_CreateWorldPartsTable.Designer.cs" />
+    <Compile Remove="Migrations\20200607071553_InsertWorldPartsThroughUpMethod.cs" />
+    <Compile Remove="Migrations\20200607071553_InsertWorldPartsThroughUpMethod.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
       <PrivateAssets>all</PrivateAssets>

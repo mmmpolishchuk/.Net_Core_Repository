@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using InfestationReports.Models;
-using InfestationReports.Models.Repositories;
+using InfestationReports.Models.Repositories.HumanRepository;
 using InfestationReports.Models.Repositories.NewsRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Infestation_reports
+namespace InfestationReports
 {
     public class Startup
     {
@@ -28,7 +24,12 @@ namespace Infestation_reports
         {
             services.AddControllersWithViews();
             services.AddDbContext<InfestationContext>(builder=>builder.UseSqlServer(Configuration.GetConnectionString("InfestationDbConnectionNew")));
-            services.AddScoped<INewsRepository, MockNewsRepository>();
+            services.AddScoped<INewsRepository, SqlNewsRepository>();
+            services.AddScoped<IHumanRepository, SqlHumanRepository>();
+
+            services.AddDbContext<InfestationContext>(builder => 
+                builder.UseSqlServer(Configuration.GetConnectionString("InfestationDbConnectionNew"))
+                .UseLazyLoadingProxies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +53,7 @@ namespace Infestation_reports
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Human}/{action=Index}/{id?}");
+                    pattern: "{controller=News}/{action=Index}/{id?}");
             });
         }
     }

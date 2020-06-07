@@ -1,20 +1,19 @@
 ﻿@section NewsSection{
-    <table class="table">
+    <table class="table table-hover">
         <tr>
             <th>Id</th>
             <th>Title</th>
             <th>Text</th>
-            <th>AuthorName</th>
+            <th colspan="2">Author</th>
             <th>IsFake</th>
         </tr>
-        @foreach (var newsObject in ViewData["allNews"] as List<News>)
+        @foreach (var news in (IEnumerable<News>)ViewData["allNews"])
         {
-            var news = newsObject as News;
             <tr>
                 <td>@news.Id</td>
                 <td>@news.Title</td>
                 <td>@news.Text</td>
-                <td>@news.AuthorName</td>
+                <td colspan="2">@news.Author.FirstName    @news.Author.LastName</td>
                 <td>@news.IsFake</td>
             </tr>
         }

@@ -1,28 +1,26 @@
-﻿
-@{
+﻿@{
     var humans = ViewData["getHumansByCountry"] as List<Human>;
 }
 
-    <table class="table">
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>Is sick</th>
+        <th>Gender</th>
+        <th>Country Id</th>
+    </tr>
+    @foreach (var human in humans)
+    {
         <tr>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Age</th>
-            <th>Is sick</th>
-            <th>Gender</th>
-            <th>Country Id</th>
+            <td>@human.FirstName</td>
+            <td>@human.LastName</td>
+            <td>@human.Age</td>
+            <td>@human.IsSick</td>
+            <td>@human.Gender</td>
+            <td>@human.Country.Name</td>
         </tr>
-        @foreach (var human in humans)
-        {
-            var singleHuman = human as Human;
-            <tr>
-                <td>@singleHuman.FirstName</td>
-                <td>@singleHuman.LastName</td>
-                <td>@singleHuman.Age</td>
-                <td>@singleHuman.IsSick</td>
-                <td>@singleHuman.Gender</td>
-                <td>@singleHuman.CountryId</td>
-            </tr>
-        }
-    </table>
+    }
+</table>
 

@@ -11,9 +11,9 @@ namespace InfestationReports.Models.Repositories.HumanRepository
         {
             _context = context;
         }
-        public List<Human> GetAllHumans()
+        public IEnumerable<Human> GetAllHumans()
         {
-            return _context.Humans.ToList();
+            return _context.Humans;
         }
 
         public Human GetHuman(int id)

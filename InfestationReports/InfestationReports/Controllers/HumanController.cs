@@ -12,17 +12,17 @@ namespace InfestationReports.Controllers
     public class HumanController : Controller
     {
         private InfestationContext _context { get; }
-        private SqlHumanRepository _humanRepository { get; }
-        public HumanController(InfestationContext context)
+        private IHumanRepository _humanRepository { get; }
+        public HumanController(InfestationContext context, IHumanRepository humanRepository)
         {
             _context = context;
-            _humanRepository = new SqlHumanRepository(_context);
+            _humanRepository = humanRepository;
         }
         public IActionResult Index(int humanid)
         {
             if (humanid == 0)
             {
-                ViewData["Human"] = _humanRepository.GetAllHumans();
+                ViewData["Human"] = _humanRepository.GetAllHumans().ToList();
             }
             else
             {
