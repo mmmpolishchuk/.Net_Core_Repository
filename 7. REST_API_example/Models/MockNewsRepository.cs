@@ -6,6 +6,7 @@ using System.Net;
 using System.Web.Http.OData;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using REST_API_example.Controllers;
 
 namespace REST_API_example.Models
 {
@@ -57,11 +58,27 @@ namespace REST_API_example.Models
 
         public void MoveNews(int id, News anotherNews)
         {
-            News[id].Id = anotherNews.Id;
-            News[id].Title = anotherNews.Title;
-            News[id].Text = anotherNews.Text;
-            News[id].AuthorName = anotherNews.AuthorName;
-            News[id].IsFake = anotherNews.IsFake;
+            if (News.Exists(news => news.Id == anotherNews.Id))
+            {
+                News[id] = anotherNews;
+            }
+            else
+            {
+                News.RemoveAt(id);
+
+                anotherNews.Id = id;
+               News.Insert(id, anotherNews);
+            }
+           
+            // find and delete duplicate by Title
+            for (int i = 0; i < News.Count; i++)
+            {
+                if (anotherNews.Title == News[i].Title && anotherNews.Id != News[i].Id)
+                {
+                    News.Remove(News[i]);
+                    return;
+                }
+            }
         }
         public void UpdateNews(int id, News news)
         {
