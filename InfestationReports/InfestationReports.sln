@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfestationReports(edited)", "InfestationReports\InfestationReports(edited).csproj", "{1D86CA3C-9CEF-477B-8B7E-6A49E5741F5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfestationReports_8dz", "InfestationReports\InfestationReports_8dz.csproj", "{1D86CA3C-9CEF-477B-8B7E-6A49E5741F5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

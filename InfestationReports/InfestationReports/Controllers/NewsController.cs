@@ -1,7 +1,5 @@
 ﻿using System.Linq;
-using System.Net;
 using InfestationReports.Models;
-using InfestationReports.Models.Repositories;
 using InfestationReports.Models.Repositories.HumanRepository;
 using InfestationReports.Models.Repositories.NewsRepository;
 using Microsoft.AspNetCore.Mvc;
@@ -10,8 +8,8 @@ namespace InfestationReports.Controllers
 {
     public class NewsController : Controller
     {
-        private INewsRepository _repositoryNews { get; set; }
-        private IHumanRepository _repositoryHuman { get; set; }
+        private INewsRepository _repositoryNews;
+        private IHumanRepository _repositoryHuman;
 
         public NewsController(INewsRepository repositoryNews, IHumanRepository repositoryHuman)
         {
@@ -19,30 +17,41 @@ namespace InfestationReports.Controllers
             _repositoryHuman = repositoryHuman;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int newsId)
         {
-            var news = _repositoryNews.GetAllNews().ToList();
-            var authors = _repositoryHuman.GetAllHumans().ToList();
-            
-            ViewData["allNews"] = news;
-            return View();
-        }
+            var author = _repositoryHuman.GetAllHumans().ToList();
 
-        public IActionResult Show(int newsId)
-        {
-            if (newsId <= _repositoryNews.GetAllNews().ToList().Count())
+            if (newsId == 0)
             {
-                var news = _repositoryNews.GetAllNews().SingleOrDefault(news => news.Id == newsId);
-                var author = _repositoryHuman.GetAllHumans().SingleOrDefault(author => news.AuthorId == author.Id);
-                var getNews = author.News.SingleOrDefault(news => news.Id == newsId);
-                ViewData["newsById"] = getNews;
+                var news = _repositoryNews.GetAllNews().AsEnumerable();
+                return View(news);
             }
             else
             {
-                const string result = "Oooops... There is no news with such ID.";
-                ViewData["newsById"] = result;
+                var singleNews = _repositoryNews.GetAllNews().Where(news => news.Id == newsId);
+                return View(singleNews);
             }
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(string Title, string Text, bool IsFake, int AuthorId)
+        {
+            News news = new News();
+            news.Title = Title;
+            news.Text = Text;
+            news.IsFake = IsFake;
+            news.AuthorId = AuthorId;
+            news.Author = _repositoryHuman.GetAllHumans().ToList().FirstOrDefault(author => author.Id == news.AuthorId);
+            
+            _repositoryNews.CreateNews(news);
+           
+            return View("Index", _repositoryNews.GetAllNews());
         }
     }
 }

@@ -7,13 +7,15 @@
             <th colspan="2">Author</th>
             <th>IsFake</th>
         </tr>
-        @foreach (var news in (IEnumerable<News>)ViewData["allNews"])
+        @foreach (News news in @Model)
         {
             <tr>
                 <td>@news.Id</td>
                 <td>@news.Title</td>
                 <td>@news.Text</td>
-                <td colspan="2">@news.Author.FirstName    @news.Author.LastName</td>
+                <td colspan="2">
+                    <a asp-controller="Human" asp-action="Author" asp-route-authorId="@news.Author.Id">@news.Author.FirstName @news.Author.LastName</a>
+                </td>
                 <td>@news.IsFake</td>
             </tr>
         }

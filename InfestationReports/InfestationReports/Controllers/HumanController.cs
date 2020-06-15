@@ -1,43 +1,90 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using InfestationReports.Models;
 using InfestationReports.Models.Repositories.HumanRepository;
-using Microsoft.AspNetCore.Identity;
+using InfestationReports.Models.Repositories.NewsRepository;
+using InfestationReports.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Differencing;
 
 namespace InfestationReports.Controllers
 {
     public class HumanController : Controller
     {
-        private InfestationContext _context { get; }
-        private IHumanRepository _humanRepository { get; }
+        private InfestationContext _context;
+        private IHumanRepository _humanRepository;
+
         public HumanController(InfestationContext context, IHumanRepository humanRepository)
         {
             _context = context;
             _humanRepository = humanRepository;
         }
-        public IActionResult Index(int humanid)
+
+        public IActionResult Index(int humanId)
         {
-            if (humanid == 0)
+            if (humanId == 0)
             {
-                ViewData["Human"] = _humanRepository.GetAllHumans().ToList();
+                var people = _humanRepository.GetAllHumans().ToList();
+                return View(people);
             }
             else
             {
-                ViewData["Human"] = _humanRepository.GetHuman(id: humanid);
+                var human = _humanRepository.GetHuman(id: humanId);
+                return View(human);
             }
-            return View();
+        }
+
+        public IActionResult Author([FromServices] INewsRepository newsRepository, int authorId)
+        {
+            var author = _humanRepository.GetAllHumans().FirstOrDefault(author => author.Id == authorId);
+            var news = newsRepository.GetAllNews().ToList();
+            
+            var viewModel = new HumanAuthorsViewModel
+            {
+                Id = author.Id,
+                FirstName = author.FirstName,
+                LastName = author.LastName,
+                NewsCount = news.Count(news => news.AuthorId == author.Id)
+            };
+            
+            return View(viewModel);
+        }
+
+        public IActionResult News([FromServices] INewsRepository newsRepository, int authorId)
+        {
+            var author = _humanRepository.GetAllHumans().FirstOrDefault(author => author.Id == authorId);
+
+            var newsByAuthor = newsRepository.GetAllNews().Where(news => news.Author == author).ToList();
+            return View(newsByAuthor);
         }
 
         public IActionResult Country(string name)
         {
             var country = _context.Countries.SingleOrDefault(country => country.Name == name);
-            var humansByCountry = _context.Humans.Where(human => country.Id == human.CountryId).ToList();
 
-            ViewData["getHumansByCountry"] = humansByCountry;
+            var humansByCountry = _context.Humans.Where(human => country.Id == human.CountryId).ToList();
+            return View(humansByCountry);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(string FirstName, string LastName, int Age, bool IsSick, string Gender,
+            int CountryId)
+        {
+            Human human = new Human();
+            human.FirstName = FirstName;
+            human.LastName = LastName;
+            human.Age = Age;
+            human.IsSick = IsSick;
+            human.Gender = Gender;
+            human.CountryId = CountryId;
+            _humanRepository.CreateHuman(human);
+            return View("Index", _humanRepository.GetAllHumans().ToList());
         }
     }
 }

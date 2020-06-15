@@ -1,6 +1,4 @@
-﻿@{
-    var humans = ViewData["getHumansByCountry"] as List<Human>;
-}
+﻿@model List<Human>
 
 <table class="table">
     <tr>
@@ -9,9 +7,9 @@
         <th>Age</th>
         <th>Is sick</th>
         <th>Gender</th>
-        <th>Country Id</th>
+        <th>Country</th>
     </tr>
-    @foreach (var human in humans)
+    @foreach (var human in @Model)
     {
         <tr>
             <td>@human.FirstName</td>

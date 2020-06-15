@@ -1,0 +1,17 @@
+﻿@model HumanAuthorsViewModel
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>News count</th>
+    </tr>
+    <tr>
+        <td>@Model.FirstName</td>
+        <td>@Model.LastName</td>
+        <td>
+            <a asp-controller="Human" asp-action="News" asp-route-authorId="@Model.Id">@Model.NewsCount</a>
+        </td>
+    </tr>
+
+</table>

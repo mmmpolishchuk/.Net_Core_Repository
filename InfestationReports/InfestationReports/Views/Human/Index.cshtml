@@ -1,8 +1,4 @@
-﻿@using System.Collections
-@{
-    var somebody = ViewData["Human"];
-}
-<table class="table">
+﻿<table class="table table-hover">
     <tr>
         <th>Name</th>
         <th>Surname</th>
@@ -11,11 +7,11 @@
         <th>Gender</th>
         <th>Country Id</th>
     </tr>
-    @if (somebody.GetType() == typeof(List<Human>))
+    @if (@Model.GetType() == typeof(List<Human>))
     {
-        @foreach (var human in somebody as List<Human>)
+        @foreach (Human human in @Model)
         {
-            <tr>
+          <tr>
                 <td>@human.FirstName</td>
                 <td>@human.LastName</td>
                 <td>@human.Age</td>
@@ -27,7 +23,7 @@
     }
     else
     {
-        var singleHuman = somebody as Human;
+        var singleHuman = Model as Human;
         <tr>
             <td>@singleHuman.FirstName</td>
             <td>@singleHuman.LastName</td>
@@ -38,7 +34,3 @@
         </tr>
     }
 </table>
-
-
-
-

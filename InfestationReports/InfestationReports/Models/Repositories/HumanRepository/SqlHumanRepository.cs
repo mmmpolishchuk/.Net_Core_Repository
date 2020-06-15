@@ -5,36 +5,38 @@ namespace InfestationReports.Models.Repositories.HumanRepository
 {
     public class SqlHumanRepository : IHumanRepository
     {
-        private InfestationContext _context { get; }
+        private InfestationContext Context { get; }
 
         public SqlHumanRepository(InfestationContext context)
         {
-            _context = context;
+            Context = context;
         }
         public IEnumerable<Human> GetAllHumans()
         {
-            return _context.Humans;
+            return Context.Humans;
         }
 
         public Human GetHuman(int id)
         {
-            return _context.Humans.SingleOrDefault(human => human.Id == id);
+            return Context.Humans.SingleOrDefault(human => human.Id == id);
+            Context.SaveChanges();
         }
 
         public void CreateHuman(Human human)
         {
-            _context.Humans.Add(human);
+            Context.Humans.Add(human);
+            Context.SaveChanges();
         }
 
         public void ModifyHuman(Human human)
         {
-            _context.Humans.Update(human);
+            Context.Humans.Update(human);
         }
 
         public void DeleteHuman(int id)
         {
-            var humanToDelete = _context.Humans.SingleOrDefault(human => human.Id == id);
-            _context.Humans.Remove(humanToDelete);
+            var humanToDelete = Context.Humans.SingleOrDefault(human => human.Id == id);
+            Context.Humans.Remove(humanToDelete);
         }
     }
 }
