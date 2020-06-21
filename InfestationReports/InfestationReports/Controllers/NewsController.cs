@@ -40,18 +40,18 @@ namespace InfestationReports.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(string Title, string Text, bool IsFake, int AuthorId)
+        public IActionResult Create(News news)
         {
-            News news = new News();
-            news.Title = Title;
-            news.Text = Text;
-            news.IsFake = IsFake;
-            news.AuthorId = AuthorId;
-            news.Author = _repositoryHuman.GetAllHumans().ToList().FirstOrDefault(author => author.Id == news.AuthorId);
-            
-            _repositoryNews.CreateNews(news);
-           
-            return View("Index", _repositoryNews.GetAllNews());
+           news.Author = _repositoryHuman.GetAllHumans().ToList().FirstOrDefault(author => author.Id == news.AuthorId);
+
+            if (ModelState.IsValid)
+            {
+                _repositoryNews.CreateNews(news);
+                return View("Index", _repositoryNews.GetAllNews());
+
+            }
+
+            return View();
         }
     }
 }

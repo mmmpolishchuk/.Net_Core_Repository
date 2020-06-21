@@ -11,6 +11,7 @@ namespace InfestationReports.Models.Repositories.HumanRepository
         {
             Context = context;
         }
+
         public IEnumerable<Human> GetAllHumans()
         {
             return Context.Humans;
@@ -19,7 +20,6 @@ namespace InfestationReports.Models.Repositories.HumanRepository
         public Human GetHuman(int id)
         {
             return Context.Humans.SingleOrDefault(human => human.Id == id);
-            Context.SaveChanges();
         }
 
         public void CreateHuman(Human human)

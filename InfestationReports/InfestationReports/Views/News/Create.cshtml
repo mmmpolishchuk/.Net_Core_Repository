@@ -1,18 +1,28 @@
 ﻿@model News
 
+<h2 class="display-5">Fill in all fields about news</h2>
+
 <form asp-controller="News" asp-action="Create" method="post">
-    
-    <label asp-for="Title">Title</label><br/>
-    <input asp-for="Title" type="text"/><br/>
-
-    <label asp-for="Text">Text</label><br/>
-    <input asp-for="Text" type="text"/><br/>
-
-    <label asp-for="AuthorId">Author Id</label><br/>
-    <input asp-for="AuthorId" type="number"/><br/>
-
-    <label asp-for="IsFake">Fake</label><br/>
-    <input asp-for="IsFake" type="checkbox"/><br/>
-
-    <button type="submit" class="btn btn-outline-success">Add news</button>
+    <div class="form-group">
+        <label asp-for="Title">Title</label><br/>
+        <input asp-for="Title" type="text" class="form-control"/>
+        <span asp-validation-for="Title" class="text-danger small align-text-bottom"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Text">Text</label><br/>
+        <input asp-for="Text" type="text" class="form-control"/>
+        <span asp-validation-for="Text" class="text-danger small align-text-bottom"></span>
+    </div>
+    <div class="form-group ">
+        <label asp-for="AuthorId">Author Id</label><br/>
+        <input asp-for="AuthorId" type="number" class="form-control"/>
+        <span asp-validation-for="AuthorId" class="text-danger small align-text-bottom"></span>
+    </div>
+    <div class="form-group form-check">
+        <input asp-for="IsFake" type="checkbox" class="form-check-input"/>
+        <label asp-for="IsFake" class="form-check-label">Fake</label><br/>
+    </div>
+    <div class="form-group ">
+        <button type="submit" class="btn btn-outline-success">Add news</button>
+    </div>
 </form>

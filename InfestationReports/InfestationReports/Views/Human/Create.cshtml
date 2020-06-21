@@ -1,21 +1,42 @@
-﻿<form method="post">
-    <label for="FirstName">First Name</label><br/>
-    <input name="FirstName" type="text"/><br/>
+﻿@model Human
 
-    <label for="LastName">Last Name</label><br/>
-    <input name="LastName" type="text"/><br/>
+<h2 class="display-5">Enter info about new human</h2>
 
-    <label for="Age">Age</label><br/>
-    <input name="Age" type="number"/><br/>
-
-    <label for="IsSick">Is Sick</label><br/>
-    <input name="IsSick" type="checkbox"/><br/>
-
-    <label for="Gender">Gender</label><br/>
-    <input name="Gender" type="text"/><br/>
-
-    <label for="CountryId">Country Id</label><br/>
-    <input name="CountryId" type="number"/><br/>
-
-    <button type="submit">Create human</button>
+<form asp-controller="Human" asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="FirstName">First name</label><br/>
+        <input asp-for="FirstName" type="text" class="form-control"/>
+        <span asp-validation-for="FirstName" class="text-danger small align-text-bottom"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName">Last name</label><br/>
+        <input asp-for="LastName" type="text" class="form-control"/>
+        <span asp-validation-for="LastName" class="text-danger small align-text-bottom"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Age">Age</label><br/>
+        <input asp-for="Age" type="number" class="form-control"/>
+        <span asp-validation-for="Age" class="text-danger small align-text-bottom"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Gender">Gender</label><br/>
+        <select asp-for="Gender" class="custom-select">
+            <option selected>Choose human's male</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+     </div>
+    <div class="form-group form-check">
+        <input asp-for="IsSick" type="checkbox" class="form-check-input"/>
+        <label asp-for="IsSick" class="form-check-label">Sick</label><br/>
+    </div>
+    <div class="form-group">
+        <label asp-for="CountryId">Country Id</label><br/>
+        <input asp-for="CountryId" type="number" class="form-control"/>
+        <span asp-validation-for="CountryId" class="text-danger small align-text-bottom"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-outline-success">Add human</button>
+    </div>
 </form>

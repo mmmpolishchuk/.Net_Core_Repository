@@ -1,7 +1,6 @@
 ﻿@section NewsSection{
-    <table class="table table-hover">
-        <tr>
-            <th>Id</th>
+    <table class="table table-hover" style="margin-top: -30px">
+        <tr style="background-color: #8cf7ff ">
             <th>Title</th>
             <th>Text</th>
             <th colspan="2">Author</th>
@@ -10,8 +9,7 @@
         @foreach (News news in @Model)
         {
             <tr>
-                <td>@news.Id</td>
-                <td>@news.Title</td>
+                <td class="font-weight-bold">@news.Title</td>
                 <td>@news.Text</td>
                 <td colspan="2">
                     <a asp-controller="Human" asp-action="Author" asp-route-authorId="@news.Author.Id">@news.Author.FirstName @news.Author.LastName</a>

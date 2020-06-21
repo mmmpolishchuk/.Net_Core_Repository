@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace InfestationReports.Models
 {
-    public class InfestationContext : DbContext
+    public class InfestationContext : IdentityDbContext
     {
         public InfestationContext(DbContextOptions options) : base(options)
         {
@@ -12,8 +13,11 @@ namespace InfestationReports.Models
         public DbSet<Human> Humans { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<WorldPart> WorldParts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<WorldPart>().HasData(
                 new WorldPart
                 {

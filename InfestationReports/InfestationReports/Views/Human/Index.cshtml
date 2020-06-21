@@ -1,5 +1,9 @@
-﻿<table class="table table-hover">
-    <tr>
+﻿@model List<Human>
+@{
+    ViewData["Title"] = "Humans";
+}
+<table class="table table-hover" style="margin-top: -14px">
+    <tr style="background-color: #8cf7ff ">
         <th>Name</th>
         <th>Surname</th>
         <th>Age</th>
@@ -7,30 +11,17 @@
         <th>Gender</th>
         <th>Country Id</th>
     </tr>
-    @if (@Model.GetType() == typeof(List<Human>))
+    @foreach (Human human in @Model)
     {
-        @foreach (Human human in @Model)
-        {
-          <tr>
-                <td>@human.FirstName</td>
-                <td>@human.LastName</td>
-                <td>@human.Age</td>
-                <td>@human.IsSick</td>
-                <td>@human.Gender</td>
-                <td>@human.CountryId</td>
-            </tr>
-        }
-    }
-    else
-    {
-        var singleHuman = Model as Human;
         <tr>
-            <td>@singleHuman.FirstName</td>
-            <td>@singleHuman.LastName</td>
-            <td>@singleHuman.Age</td>
-            <td>@singleHuman.IsSick</td>
-            <td>@singleHuman.Gender</td>
-            <td>@singleHuman.CountryId</td>
+            <td>@human.FirstName</td>
+            <td>@human.LastName</td>
+            <td>@human.Age</td>
+            <td>@human.IsSick</td>
+            <td>@human.Gender</td>
+            <td>@human.Country.Name</td>
         </tr>
     }
+
+
 </table>
