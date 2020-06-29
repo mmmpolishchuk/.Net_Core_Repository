@@ -19,7 +19,6 @@ namespace InfestationReports.ViewModels
         [Compare("Password")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
-        public bool SendSms { get; set; }
-        public bool SendEmail { get; set; }
+        
     }
 }

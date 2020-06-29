@@ -39,16 +39,6 @@
                                 <label asp-for="ConfirmPassword" class="sr-only">Email</label>
                                 <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm password">
                             </div>
-                            <div id="sendMessageGoup" style="text-align: center " >
-                                <div class="form-group form-check" >
-                                    <input asp-for="SendSms" type="checkbox" id="smsBox" class="form-check-input"/>
-                                    <label asp-for="SendSms" class="form-check-label small">Send SMS to confirm</label><br/>
-                                </div>
-                                <div class="form-group form-check">
-                                    <input asp-for="SendEmail" type="checkbox" id="emailBox" class="form-check-input"/>
-                                    <label asp-for="SendEmail" class="form-check-label small">Send Email to confirm</label><br/>
-                                </div>
-                            </div>
                             <button type="submit" class="btn btn-primary btn-lg">Register</button>
                         </form>
                     </div>
@@ -58,45 +48,3 @@
     </div>
 </section>
 
-@* <!DOCTYPE html> *@
-@* *@
-@* <html> *@
-@* <head> *@
-@*     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> *@
-@*     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> *@
-@*     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> *@
-@*     <!------ Include the above in your HEAD tag ----------> *@
-@* </head> *@
-@* <body> *@
-@* <div> *@
-@*     <div class="wrapper fadeInDown"> *@
-@*         <div id="formContent"> *@
-@*             <!-- Tabs Titles --> *@
-@*             <!-- Login Form --> *@
-@*             <form asp-controller="Account" asp-action="Register" method="post" class="align-content-center"> *@
-@*                 <input asp-for="Email" type="text" class="fadeIn first" placeholder="Login"> *@
-@*                 <input asp-for="Password" type="text" class="fadeIn second" placeholder="Password"> *@
-@*                 <input asp-for="ConfirmPassword" type="submit" class="fadeIn third" placeholder="Confirm password"> *@
-@*                  *@
-@*                  <button type="submit" class="btn btn-light">Login</button> *@
-@*             $1$ #1# *@
-@*             $1$ </form> #1# *@
-@*             $1$ <form asp-controller="Account" asp-action="Register" method="post" class="align-content-center"> #1# *@
-@*             $1$     <div asp-validation-summary="All"></div> #1# *@
-@*             $1$ #1# *@
-@*             $1$     <label asp-for="Email">Email</label><br/> #1# *@
-@*             $1$     <input asp-for="Email"/><br/> #1# *@
-@*             $1$ #1# *@
-@*             $1$     <label asp-for="Password">Password</label><br/> #1# *@
-@*             $1$     <input asp-for="Password"/><br/> #1# *@
-@*             $1$ #1# *@
-@*             $1$     <label asp-for="ConfirmPassword">Confirm password</label><br/> #1# *@
-@*             $1$     <input asp-for="ConfirmPassword"/><br/> #1# *@
-@*             $1$ #1# *@
-@*             $1$     <button type="submit" class="btn btn-light">Login</button> #1# *@
-@*             </form> *@
-@*         </div> *@
-@*     </div> *@
-@* </div> *@
-@* </body> *@
-@* </html> *@

@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> _SignInManager
+@inject SignInManager<IdentityUser> SignInManager
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +22,7 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="ml-auto">
-                    @if (_SignInManager.IsSignedIn(User))
+                    @if (SignInManager.IsSignedIn(User))
                     {
                         <div class="container" style="margin-bottom: -30px">
                             <ul class="navbar-nav">

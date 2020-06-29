@@ -1,15 +1,17 @@
-﻿namespace InfestationReports.Infrastructure.Services.Interfaces
+﻿using InfestationReports.Infrastructure.Services.Implementations;
+
+namespace InfestationReports.Infrastructure.Services.Interfaces
 {
-    public interface IMessageService<T>
+    public interface IMessageService
     {
-        void SendMessage();
+        void SendMessage(string subject, string text, SenderType senderType);
     }
 
-    public class Email
-    {
-    }
-
-    public class Sms
-    {
-    }
+    // public class Email
+    // {`
+    // }
+    //
+    // public class Sms
+    // {
+    // }
 }

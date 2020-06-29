@@ -1,3 +1,6 @@
+using System;
+using InfestationReports.Infrastructure.Configuration;
+using InfestationReports.Infrastructure.Middlewares;
 using InfestationReports.Infrastructure.Services.Implementations;
 using InfestationReports.Infrastructure.Services.Interfaces;
 using InfestationReports.Models;
@@ -10,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.VisualStudio.Web.CodeGeneration.Utils.Messaging;
 
 namespace InfestationReports
 {
@@ -25,16 +29,26 @@ namespace InfestationReports
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddNewtonsoftJson();
+            services.AddControllersWithViews();
+
             services.AddDbContext<InfestationContext>(builder =>
                 builder.UseSqlServer(Configuration.GetConnectionString("InfestationDbConnectionNew")));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<InfestationContext>();
+
             services.AddScoped<INewsRepository, SqlNewsRepository>();
             services.AddScoped<IHumanRepository, SqlHumanRepository>();
-            services.AddScoped<IMessageService<Sms>, SmsMessageService>();
-            services.AddScoped<IMessageService<Email>, EmailMessageService>();
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<InfestationContext>();
-            services.AddControllers().AddNewtonsoftJson(x =>
-                x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddTransient<IMessageService, MessageSendingService>();
+
+            // використання даних із appsettings.json
+            var section = Configuration.GetSection("Infestation");
+            var phoneSection = Configuration.GetSection("Infestation:PhoneNumbers");
+            var emailsSection = Configuration.GetSection("Infestation:Emails");
+            var twilioInfo = Configuration.GetSection("Twilio");
+
+            services.Configure<InfestationConfiguration>(section);
+            services.Configure<InfestationConfiguration>(phoneSection);
+            services.Configure<InfestationConfiguration>(emailsSection);
+            services.Configure<InfestationConfiguration>(twilioInfo);
 
             services.AddDbContext<InfestationContext>(builder =>
                 builder.UseSqlServer(Configuration.GetConnectionString("InfestationDbConnectionNew"))
@@ -56,6 +70,8 @@ namespace InfestationReports
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseWhen(context => context.Request.Path == "/Human/Create", builder => { builder.UserInfoSender(); });
 
             app.UseAuthentication();
             app.UseAuthorization();

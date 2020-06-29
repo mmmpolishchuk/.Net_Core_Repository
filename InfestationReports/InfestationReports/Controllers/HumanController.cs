@@ -61,8 +61,8 @@ namespace InfestationReports.Controllers
                     people.Add(_humanRepository.GetHuman(hum));
                 }
             }
-
-            return View(people);
+           HttpContext.Response.StatusCode = 418;
+           return View(people);
         }
 
         public IActionResult Author([FromServices] INewsRepository newsRepository, int authorId)

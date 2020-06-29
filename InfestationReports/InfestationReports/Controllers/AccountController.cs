@@ -2,29 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InfestationReports.Infrastructure.Configuration;
 using InfestationReports.Infrastructure.Services.Implementations;
 using InfestationReports.Infrastructure.Services.Interfaces;
 using InfestationReports.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace InfestationReports.Controllers
 {
     public class AccountController : Controller
     {
-        public SignInManager<IdentityUser> SignInManager { get; }
-        public UserManager<IdentityUser> UserManager { get; }
-        public IMessageService<Email> EmailSender { get; }
-        public IMessageService<Sms> SmsSender { get; }
+        private SignInManager<IdentityUser> SignInManager { get; }
+        private UserManager<IdentityUser> UserManager { get; }
+        private IMessageService MessageService { get; }
 
         public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
-            IMessageService<Sms> smsSender, IMessageService<Email> emailSender)
+            IMessageService messageService)
         {
             SignInManager = signInManager;
             UserManager = userManager;
-            EmailSender = emailSender;
-            SmsSender = smsSender;
+            MessageService = messageService;
         }
 
         [HttpGet]
@@ -42,14 +42,9 @@ namespace InfestationReports.Controllers
             if (createTask.Result.Succeeded)
             {
                 SignInManager.SignInAsync(user, false);
-                if (account.SendEmail)
-                {
-                    EmailSender.SendMessage();
-                }
-                else if (account.SendSms)
-                {
-                    SmsSender.SendMessage();
-                }
+
+                MessageService.SendMessage("Sms-o4ka", "",
+                    SenderType.Sms);
 
                 return RedirectToAction("Index", "News");
             }
