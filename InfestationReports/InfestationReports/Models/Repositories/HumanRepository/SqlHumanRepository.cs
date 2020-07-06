@@ -25,7 +25,7 @@ namespace InfestationReports.Models.Repositories.HumanRepository
         public void CreateHuman(Human human)
         {
             Context.Humans.Add(human);
-            Context.SaveChanges();
+          Context.SaveChanges();
         }
 
         public void ModifyHuman(Human human)

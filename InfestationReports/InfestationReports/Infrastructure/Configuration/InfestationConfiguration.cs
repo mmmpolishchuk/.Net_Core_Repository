@@ -13,6 +13,8 @@ namespace InfestationReports.Infrastructure.Configuration
         public string AccountSid { get; set; }
         public string AuthToken { get; set; }
         public bool CancelSending { get; set; }
-      
+        public int ExpirationCacheTime { get; set; }
+        public int DelayTime { get; set; }
+        public string ContentType { get; set; }
     }
 }

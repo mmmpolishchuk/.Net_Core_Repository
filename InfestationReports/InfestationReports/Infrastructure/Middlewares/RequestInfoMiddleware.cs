@@ -40,7 +40,7 @@ namespace InfestationReports.Infrastructure.Middlewares
             if (CancelSending == false)
             {
                 Sender = context.Request.Host.ToString();
-                Params = context.Request.GetEncodedPathAndQuery() + " " + context.Request.Method + " " + context.Request.Protocol;
+                Params = context.Request.GetEncodedPathAndQuery();
                 Date = DateTime.Now;
 
                 MessageService.SendMessage("Request info",

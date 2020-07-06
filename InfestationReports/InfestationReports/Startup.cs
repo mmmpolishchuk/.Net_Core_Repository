@@ -1,4 +1,5 @@
 using System;
+using InfestationReports.Infrastructure.BackgroundServiceFolder;
 using InfestationReports.Infrastructure.Configuration;
 using InfestationReports.Infrastructure.Middlewares;
 using InfestationReports.Infrastructure.Services.Implementations;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.Web.CodeGeneration.Utils.Messaging;
 
@@ -35,28 +37,42 @@ namespace InfestationReports
                 builder.UseSqlServer(Configuration.GetConnectionString("InfestationDbConnectionNew")));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<InfestationContext>();
 
+            // Memory cache
+            services.AddMemoryCache();
+ 
+            // Hosted services
+            services.AddHostedService<LoadFileService>();
+            services.AddHostedService<UploadFileService>();
+            
             services.AddScoped<INewsRepository, SqlNewsRepository>();
             services.AddScoped<IHumanRepository, SqlHumanRepository>();
             services.AddTransient<IMessageService, MessageSendingService>();
+            services.TryAddScoped<IExampleRestClient, ExampleRestClient>();
+            services.AddTransient<IFileProcessingChannel, FileProcessingChannel>();
 
-            // використання даних із appsettings.json
+            // services.AddTransient<IHostedService, LoadFileService>();
+            // services.AddTransient<IHostedService, UploadFileService>();
+
+            // AppSettings sections registrations
             var section = Configuration.GetSection("Infestation");
             var phoneSection = Configuration.GetSection("Infestation:PhoneNumbers");
             var emailsSection = Configuration.GetSection("Infestation:Emails");
             var twilioInfo = Configuration.GetSection("Twilio");
-
             services.Configure<InfestationConfiguration>(section);
             services.Configure<InfestationConfiguration>(phoneSection);
             services.Configure<InfestationConfiguration>(emailsSection);
             services.Configure<InfestationConfiguration>(twilioInfo);
 
+            services.Configure<IISServerOptions>(options => { options.MaxRequestBodySize = int.MaxValue; });
+
+            // DbContext registration
             services.AddDbContext<InfestationContext>(builder =>
                 builder.UseSqlServer(Configuration.GetConnectionString("InfestationDbConnectionNew"))
                     .UseLazyLoadingProxies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -75,7 +91,6 @@ namespace InfestationReports
 
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.UseEndpoints(endpoints =>
             {
