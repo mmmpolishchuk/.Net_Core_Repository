@@ -44,11 +44,12 @@ namespace InfestationReports
             services.AddHostedService<LoadFileService>();
             services.AddHostedService<UploadFileService>();
             
+            services.AddSingleton<IFileProcessingChannel, FileProcessingChannel>();
             services.AddScoped<INewsRepository, SqlNewsRepository>();
             services.AddScoped<IHumanRepository, SqlHumanRepository>();
             services.AddTransient<IMessageService, MessageSendingService>();
-            services.TryAddScoped<IExampleRestClient, ExampleRestClient>();
-            services.AddTransient<IFileProcessingChannel, FileProcessingChannel>();
+            services.AddScoped<IExampleRestClient, ExampleRestClient>();
+           
 
             // services.AddTransient<IHostedService, LoadFileService>();
             // services.AddTransient<IHostedService, UploadFileService>();

@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using InfestationReports.Infrastructure.Configuration;
 using InfestationReports.Infrastructure.Services.Implementations;
 using InfestationReports.Infrastructure.Services.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -10,32 +13,30 @@ namespace InfestationReports.Infrastructure.BackgroundServiceFolder
 {
     public class UploadFileService : BackgroundService
     {
-        private readonly FileProcessingChannel _fileProcessingChannel;
+        private IFileProcessingChannel FileProcessingChannel { get; }
+        private IServiceProvider ScopeFactory { get; }
 
-        private readonly IServiceScopeFactory _scopeFactory;
-        // private readonly IExampleRestClient _restClient;
-
-        public UploadFileService(FileProcessingChannel fileProcessingChannel, IExampleRestClient restClient,
-            IServiceScopeFactory scopeFactory)
+        public UploadFileService(IFileProcessingChannel fileProcessingChannel, IServiceProvider scopeFactory)
         {
-            _fileProcessingChannel = fileProcessingChannel;
-            // _restClient = restClient;
-            _scopeFactory = scopeFactory;
+            FileProcessingChannel = fileProcessingChannel;
+            ScopeFactory = scopeFactory;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            using (var scope = _scopeFactory.CreateScope())
+            using var scope = ScopeFactory.CreateScope();
+
+            var restClient = scope.ServiceProvider.GetRequiredService<IExampleRestClient>();
+
+            // на цьому місці програма вилітає. Але тільки в режимі дебагу. 
+            await Task.Run(() =>
             {
-                await foreach (var file in _fileProcessingChannel.GetAllFilesAsync().WithCancellation(stoppingToken))
+                foreach (var file in FileProcessingChannel.GetAllFiles())
                 {
-                    var restClient =
-                        scope.ServiceProvider
-                            .GetRequiredService<IExampleRestClient>();
-                    
                     restClient.UploadFile(file);
                 }
-            }
+            }, stoppingToken);
         }
+       
     }
 }

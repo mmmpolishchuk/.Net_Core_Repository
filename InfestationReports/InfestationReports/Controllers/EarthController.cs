@@ -52,17 +52,17 @@ namespace InfestationReports.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Upload(EarthUploadViewModel uploadFile)
+        public IActionResult Upload([FromForm]EarthUploadViewModel uploadFile)
         {
             if (uploadFile.File?.Length > 0)
             {
-                await _fileProcessingChannel.SetAsync(uploadFile.File);
+                 _fileProcessingChannel.Set(uploadFile.File);
 
                 uploadFile.Stage = UploadStage.Completed;
                 uploadFile.File = null;
             }
                
-            return View();
+            return View(uploadFile);
         }
     }
 }

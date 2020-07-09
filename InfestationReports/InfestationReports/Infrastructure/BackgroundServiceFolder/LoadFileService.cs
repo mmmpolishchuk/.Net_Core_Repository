@@ -7,24 +7,21 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Hosting;
+
 namespace InfestationReports.Infrastructure.BackgroundServiceFolder
 {
     public class LoadFileService : BackgroundService
     {
         private readonly IMemoryCache _cache;
-
-        private readonly IServiceScopeFactory _scopeFactory;
-
-        // private readonly IExampleRestClient _restClient;
+        private IServiceProvider ServiceProvider { get; set; }
         private readonly InfestationConfiguration _infestationConfiguration;
 
-        public LoadFileService(IMemoryCache cache, IExampleRestClient restClient,
-            IOptions<InfestationConfiguration> options, IServiceScopeFactory scopeFactory)
+        public LoadFileService(IMemoryCache cache, IOptions<InfestationConfiguration> options,
+            IServiceProvider serviceProvider)
         {
             _cache = cache;
-            _scopeFactory = scopeFactory;
-            // _restClient = restClient;
-            _infestationConfiguration = options.Value;
+            ServiceProvider = serviceProvider;
+           _infestationConfiguration = options.Value;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -34,12 +31,12 @@ namespace InfestationReports.Infrastructure.BackgroundServiceFolder
 
         private async Task DoWork(CancellationToken cancellationToken)
         {
-            using (var scope = _scopeFactory.CreateScope())
+            using (var scope = ServiceProvider.CreateScope())
             {
-                var restClient = 
+                var restClient =
                     scope.ServiceProvider
                         .GetRequiredService<IExampleRestClient>();
-                
+
                 while (!cancellationToken.IsCancellationRequested)
                 {
                     var image = restClient.GetFile();
@@ -63,3 +60,4 @@ namespace InfestationReports.Infrastructure.BackgroundServiceFolder
         }
     }
 }
+// private readonly IExampleRestClient _restClient;

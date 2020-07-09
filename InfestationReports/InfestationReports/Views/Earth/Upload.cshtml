@@ -1,50 +1,24 @@
 ﻿@model EarthUploadViewModel
+@{
+    ViewData["Title"] = "Upload file";
+}
 
-<h2 class="display-5">Upload file</h2>
-@* <form class="md-form"> *@
-@*     <div class="file-field"> *@
-@*         <div class="btn btn-primary btn-sm float-left"> *@
-@*             <span>Choose file</span> *@
-@*             <input type="file"> *@
-@*         </div> *@
-@*         $1$ <div class="file-path-wrapper"> #1# *@
-@*         $1$     <input class="file-path validate" type="text" placeholder="Upload your file"> #1# *@
-@*         $1$ </div> #1# *@
-@*         <div class="form-group "> *@
-@*             <button type="submit" class="btn btn-outline-primary">Upload</button> *@
-@*         </div> *@
-@*     </div> *@
-@* </form> *@
-@* <form method="POST" action="#" enctype="multipart/form-data"> *@
-@* 	<div class="form-group"> *@
-@* 		<div class="input-group input-file col-md-5" > *@
-@* 			<div class="custom-file"> *@
-@* 				<input asp-for="File" type="file" class="custom-file-input" multiple="multiple"> *@
-@* 				<label class="custom-file-label"> *@
-@* 					Select file... *@
-@* 				</label> *@
-@* 			</div> *@
-@* 		</div> *@
-@* 	</div> *@
+@if (Model?.Stage == UploadStage.Completed)
+{
+    <h2 class="display-5">Upload completed</h2>
+}
+else
+{
+    <h2 class="display-5">Upload file</h2>
 
-@* </form> *@
-@* <form enctype="multipart/form-data" method="post"> *@
-@*     <div class="custom-file col-md-5"> *@
-@*         <input asp-for="File" type="file" class="custom-file-input" multiple="multiple" data-show-upload="true" data-show-caption="true"> *@
-@*         <label asp-for="File" class="custom-file-label">Choose file</label> *@
-@*     </div> *@
-@*     <div class="form-group" style="margin-top: 10px"> *@
-@*         <button type="submit" class="btn btn-primary pull-right" disabled>Upload</button> *@
-@*         <button type="reset" class="btn btn-danger">Reset</button> *@
-@*     </div> *@
-@* </form> *@
-<form enctype="multipart/form-data" method="post">
-    <div class="custom-file col-md-5">
-        <input asp-for="File" type="file" class="custom-file-input" multiple="multiple" data-show-upload="true" data-show-caption="true">
-        <label asp-for="File" class="custom-file-label">Choose file</label>
-    </div>
-    <div class="form-group" style="margin-top: 10px">
-        <button type="submit" class="btn btn-primary pull-right" disabled>Upload</button>
-        <button type="reset" class="btn btn-danger">Reset</button>
-    </div>
-</form>
+    <form enctype="multipart/form-data" method="post">
+        <div class="custom-file col-md-5">
+            <input asp-for="File" type="file" class="custom-file-input" multiple="multiple" data-show-upload="true" data-show-caption="true">
+            <label asp-for="File" class="custom-file-label">Choose file</label>
+        </div>
+        <div class="form-group" style="margin-top: 10px">
+            <button type="submit" class="btn btn-primary pull-right">Upload</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+        </div>
+    </form>
+}

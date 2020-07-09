@@ -10,20 +10,19 @@ namespace InfestationReports.Infrastructure.Services.Implementations
     public class FileProcessingChannel : IFileProcessingChannel
     {
         private readonly Channel<IFormFile> _channel;
+        private List<IFormFile> Files { get; }
 
         public FileProcessingChannel()
         {
             _channel = Channel.CreateUnbounded<IFormFile>();
         }
-
-        public async Task SetAsync(IFormFile file)
+        public IEnumerable<IFormFile> GetAllFiles()
         {
-            await _channel.Writer.WriteAsync(file);
-        }
-
-        public IAsyncEnumerable<IFormFile> GetAllFilesAsync()
-        {
-            return _channel.Reader.ReadAllAsync();
+            if ( _channel.Reader.TryRead(out var file))
+            {
+                Files.Add(file);
+            };
+            return Files;
         }
 
         public void Set(IFormFile file)
